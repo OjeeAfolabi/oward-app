@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 
-const NavModal = () => {
-  const [close, setClose] = useState();
+const NavModal = ({setModal}) => {
 
   return (
     <div className="flex fixed top-0 left-0 border border-green-700 h-[100vh] w-[100%] bg-[rgb(0,0,0,0.8)]">
@@ -9,7 +10,7 @@ const NavModal = () => {
         <button className="bg-slate-900 w-[100%] text-white p-4 text-2xl">
           Hello Guest
         </button>
-        <div className="bg-[white] pl-8 flex flex-col gap-[1em]">
+        <div className="bg-[white] h-screen overflow-auto pl-8 flex flex-col gap-[1em] pb-20">
           <p className="text-lg mt-4 font-bold">Digital Content and Devices</p>
           <p>Amazon Music</p>
           <p>Kindle E-readers & Books</p>
@@ -42,9 +43,9 @@ const NavModal = () => {
       </div>
 
       <div className="p-5 border border-[blue]">
-        <span>
-          <img className="w-[2em]" src="icons/clear.svg" alt="" />
-        </span>
+        <button onClick={()=> setModal(false)}>
+          <img  className="w-[2em]" src="icons/clear.svg" alt="" />
+        </button>
       </div>
     </div>
   );

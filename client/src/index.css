@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Ubuntu+Sans&family=Poetsen+One&display=swap');
+
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
+body{
+  font-family: "Ubuntu Sans";
+}
 
 *{
   box-sizing: border-box;

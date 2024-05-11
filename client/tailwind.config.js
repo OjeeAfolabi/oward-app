@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily:{
+      script:["Dancing Script"]
+    },
     extend: {},
   },
   plugins: [],
