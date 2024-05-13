@@ -40,7 +40,7 @@ const Header = () => {
 
         <div className="flex items-center gap-[1rem] md:gap-[1em] ">
           <div className="flex flex-col">
-            <span className='md:ml-3 hidden md:flex w-[6em] text-[orange]'>Hello, Guest</span>
+            <span className='md:ml-3 hidden md:flex w-[6em] text-[#ffa500]'>Hello, Guest</span>
             <span className="md:hidden text-white"><strong>Guest</strong></span>
             <span className="md:ml-3 mt-0 mb-0 hidden md:flex">
               <button className="text-white "><strong>Sign in</strong></button>

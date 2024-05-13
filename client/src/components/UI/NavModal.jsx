@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
+import { FaRegUser } from "react-icons/fa";
 
 const NavModal = ({setModal}) => {
 
   return (
-    <div className="flex fixed top-0 left-0 border border-green-700 h-[100vh] w-[100%] bg-[rgb(0,0,0,0.8)]">
-      <div className="w-[80%] md:w-[20%] flex-col border border-red-700">
-        <button className="bg-slate-900 w-[100%] text-white p-4 text-2xl">
-          Hello Guest
+    <div className="flex fixed top-0 left-0 h-[100vh] w-[100%] bg-[rgb(0,0,0,0.8)]">
+      <div className="w-[80%] md:w-[30%] flex-col ">
+        <button className="bg-slate-900 w-[100%] text-white p-4 text-2xl flex justify-center items-center gap-[1rem]"> <FaRegUser/>
+          Hello, Guest
         </button>
         <div className="bg-[white] h-screen overflow-auto pl-8 flex flex-col gap-[1em] pb-20">
           <p className="text-lg mt-4 font-bold">Digital Content and Devices</p>
@@ -42,7 +43,7 @@ const NavModal = ({setModal}) => {
         </div>
       </div>
 
-      <div className="p-5 border border-[blue]">
+      <div className="p-5">
         <button onClick={()=> setModal(false)}>
           <img  className="w-[2em]" src="icons/clear.svg" alt="" />
         </button>
