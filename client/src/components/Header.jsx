@@ -3,6 +3,8 @@ import { useState } from "react";
 import NavModal from "./UI/NavModal";
 import ReactDOM from 'react-dom'
 import { FaRegUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 
 const Header = () => {
 
@@ -13,15 +15,15 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-slate-500 justify-center flex-col w-[100%] pb-1 pt-1">
-      <div className="w-[100%] flex justify-between items-center ">
+    <div className="fixed z-[2] top-0 left-0 bg-slate-500 justify-center items-center flex-col w-[100%] p-1">
+      <div className="w-[100%] flex justify-between items-center">
         <div className="flex">
-          <img
+          <button><img
             onClick={clickHandler}
             className="w-[40px] ml-2"
             src="icons/hamburger.svg"
             alt=""
-          />
+          /></button>
           <img
             className="w-[80px] m-0 h-[40px]"
             src="icons/amazon.svg"
@@ -43,13 +45,15 @@ const Header = () => {
             <span className='md:ml-3 hidden md:flex w-[6em] text-[#ffa500]'>Hello, Guest</span>
             <span className="md:hidden text-white"><strong>Guest</strong></span>
             <span className="md:ml-3 mt-0 mb-0 hidden md:flex">
-              <button className="text-white "><strong>Sign in</strong></button>
+              <Link to='/login'><strong className="text-[white]">Sign in</strong></Link> 
             </span>
           </div>
           <span className="flex md:hidden m-0 p-0"><FaRegUser className="m-0 p-0 text-xl text-white  "/></span>
 
           <div>
-            <img className="w-[2em] mr-2" src="icons/cart.svg" alt="" />
+            <Link to='/cart'>
+              <img className="w-[2em] mr-2" src="icons/cart.svg" alt="" />
+            </Link>
           </div>
         </div>
       </div>

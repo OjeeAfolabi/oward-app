@@ -2,8 +2,10 @@
 
 const Product = () => {
   return (
-    <div>Product</div>
-  )
-}
+   <div>
+    Product Page
+   </div>
+  );
+};
 
-export default Product
+export default Product;
