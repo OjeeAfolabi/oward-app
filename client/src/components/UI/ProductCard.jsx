@@ -1,7 +1,7 @@
 
 const ProductCard = () => {
   return (
-      <div className=" w-[40%] md:w-[20%] flex flex-col  justify-center items-center gap-2 md:gap-4 p-4 rounded border-2 border-slate-600  m-3">
+      <div className="w-[40%] md:w-[20%] flex flex-col  justify-center items-center gap-2 md:gap-4 p-4 rounded border-2 border-slate-600  m-3">
         <img className="w-[7rem] " src="images/newbalance.png" alt="" />
         <div>
           <p className="border border-[#ffa500] p-1 rounded md:font-semibold ">

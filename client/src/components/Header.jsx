@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed z-[2] top-0 left-0 bg-slate-500 justify-center items-center flex-col w-[100%] p-1">
+    <div className="fixed z-[2] top-0 left-0 bg-slate-500 justify-center items-center flex-col w-[100%] p-1 border-4px border-red-600">
       <div className="w-[100%] flex justify-between items-center">
         <div className="flex">
           <button><img

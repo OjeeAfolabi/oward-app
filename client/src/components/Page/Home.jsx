@@ -8,7 +8,7 @@ const Home = () => {
 
       <div className="relative w-[inherit] h-[80vh] md:h-[100vh] mt-[6.5em] bg-[url('images/amazonbg.jpg')] bg-cover md:mt-[3em] ">
         {/* <img className="absolute " src="images/amazonbg.jpg" alt="" /> */}
-        <div className="absolute bottom-0 left-0 w-[inherit] justify-center items-center md:flex-row flex md:gap-[2rem] flex-col gap-3 border-[4px]">
+        <div className="absolute bottom-0 left-0 w-[inherit] justify-center items-center md:flex-row flex md:gap-[2rem] flex-col gap-3">
          <div className="flex justify-center">
            <CategoryCard />
          </div>
@@ -22,7 +22,7 @@ const Home = () => {
         
       </div>
 
-      <div className="bg-[pink]">
+      <div className="bg-[#fbdeda]">
           <div className=" justify-center items-center md:gap-[2rem] md:pt-[2rem] flex flex-col pt-[1rem] gap-[1rem] md:flex-row ">
             <CategoryCard />
             <CategoryCard />

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 
 const CategoryCard = () => {
@@ -10,7 +10,7 @@ const CategoryCard = () => {
           <img src="images/shoetest.png" alt="" />
         </div>
         <div>
-          <Link className='text-[#ffa500]'><strong>Shop Now</strong></Link>
+          <Link to ={'/products'} className='text-[#ffa500]'><strong>Shop Now</strong></Link>
         </div>
         </div>
         
