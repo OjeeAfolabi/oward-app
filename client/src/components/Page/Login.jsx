@@ -1,5 +1,5 @@
-import {useState} from "react"
-import axios from 'axios'
+import {useState} from "react";
+import axios from 'axios';
 import { Link } from "react-router-dom";
 import LoginSignfooter from "./LoginSignfooter";
 import { LiaHandPointLeftSolid } from "react-icons/lia";
@@ -11,9 +11,15 @@ const Login = () => {
    })
 
 
-  const loginUser = (e) => {
+  const loginUser = async(e) => {
     e.preventDefault();
-    axios.get('/')
+    try{
+      const result = await axios.get('/api/v1/oward/test')
+      console.log(result)
+    }catch(err){
+      console.log(err)
+    }
+    
   };
 
 
@@ -28,7 +34,7 @@ const Login = () => {
             </Link>
           </span>
           <div className="flex justify-center items-center w-[100%] mt-4 ">
-            <div className="flex flex-col border border-slate-700 mb-10 mt-8 p-4 gap-[1rem] w-[90%] items-left justify-left rounded md:w-[40%] md:mb-[1rem]">
+            <div className="bg-slate-300 flex flex-col border border-slate-700 mb-10 mt-8 p-4 gap-[1rem] w-[90%] items-left justify-left rounded md:w-[40%] md:mb-[1rem]">
               <p className="text-left text-2xl font-bold md:text-3xl">Sign in</p>
       
               <div>
