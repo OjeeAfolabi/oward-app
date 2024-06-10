@@ -1,7 +1,7 @@
 // import React from 'react'
 import { useState,useEffect } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginSignfooter from "./LoginSignfooter";
 import toast,{Toaster} from "react-hot-toast";
 
@@ -15,6 +15,9 @@ const Signup = () => {
     error:null
   }
   );
+
+
+  const navigate = useNavigate()
  
 
 
@@ -29,13 +32,16 @@ const Signup = () => {
       },
     };
     const body = JSON.stringify({ name, email, password, confirmPassword });
+    
     try {
       const res = await axios.post(
         "http://localhost:3000/api/v1/oward/signup",
         body,
         config
       );
-      console.log(res);
+      if (res) {
+        navigate("/");
+      }
     } catch (error) {
       // console.log(error.response.data.data);
       setData((prev)=>{
@@ -49,7 +55,6 @@ const Signup = () => {
 
     useEffect(()=>{
       if (data.error){
-        // console.log("toast is: ",toast)
         toast(data.error);
         setData((prev)=>{
           return {

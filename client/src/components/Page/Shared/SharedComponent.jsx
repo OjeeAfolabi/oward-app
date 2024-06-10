@@ -1,16 +1,20 @@
+/* eslint-disable react/prop-types */
 // import React from 'react'
 import { Outlet } from "react-router-dom"
 import Header from "../../Header"
 import Footer from "../../Footer"
-import { Toaster } from 'react-hot-toast';
+import { useState } from "react"
+// import { useEffect } from "react"
 
 
-const SharedComponent = () => {
+const SharedComponent = ({setLoggedin,name}) => {
+
+  const [overflow,setOverflow] = useState('auto')
+
   return (
     <div>
-        <Header/>
-        {/* <Toaster position="bottom-right" toastOptions={{duration:2000}}/> */}
-        <Outlet/>
+        <Header setLoggedin ={setLoggedin} setOverflow={setOverflow} name={name} />
+        <Outlet context={{value:overflow}}/>
         <Footer/>
     </div>
   )

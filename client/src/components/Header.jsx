@@ -1,29 +1,59 @@
+/* eslint-disable react/prop-types */
 // import React from 'react'
 import { useState } from "react";
 import NavModal from "./UI/NavModal";
-import ReactDOM from 'react-dom'
+import SignOutModal from "./UI/SignOutModal";
+import ReactDOM from "react-dom";
 import { FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-
-const Header = () => {
-
+const Header = ({ setLoggedin, name, setOverflow }) => {
   const [modal, setModal] = useState(false);
+  const [logoutModal, setLogoutModal] = useState(false);
 
   const clickHandler = () => {
-    setModal(true)
+    setModal(true);
+    setOverflow("hidden")
+  };
+
+  const signoutHandler =()=>{
+    setLogoutModal(true);
+    setOverflow("hidden")
+  }
+
+  const logout = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.get(
+        "http://localhost:3000/api/v1/oward/logout",
+        config
+      );
+      if (res) {
+        setLoggedin(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <div className="fixed z-[2] top-0 left-0 bg-slate-500 justify-center items-center flex-col w-[100%] p-1 border-4px border-red-600">
+    <div className="fixed z-[2] top-0 left-0 bg-slate-500 justify-center items-center flex-col w-[100%] p-1 overflow-hidden">
       <div className="w-[100%] flex justify-between items-center">
         <div className="flex">
-          <button><img
-            onClick={clickHandler}
-            className="w-[40px] ml-2"
-            src="icons/hamburger.svg"
-            alt=""
-          /></button>
+          <button>
+            <img
+              onClick={clickHandler}
+              className="w-[40px] ml-2"
+              src="icons/hamburger.svg"
+              alt=""
+            />
+          </button>
           <img
             className="w-[80px] m-0 h-[40px]"
             src="icons/amazon.svg"
@@ -32,47 +62,77 @@ const Header = () => {
         </div>
 
         <div className="md:flex hidden bg-white rounded">
-          <input className="focus:outline-none text-center rounded w-[30rem]" type="text" />
-          <span><img
-            className="w-[2em] bg-[orange] rounded p-1"
-            src="icons/search.svg"
-            alt=""
-          /></span> 
+          <input
+            className="focus:outline-none text-center rounded w-[30rem]"
+            type="text"
+          />
+          <span>
+            <img
+              className="w-[2em] bg-[orange] rounded p-1"
+              src="icons/search.svg"
+              alt=""
+            />
+          </span>
         </div>
 
         <div className="flex items-center gap-[1rem] md:gap-[1em] ">
           <div className="flex flex-col">
-            <span className='md:ml-3 hidden md:flex w-[6em] text-[#ffa500]'>Hello, Guest</span>
-            <span className="md:hidden text-white"><strong>Guest</strong></span>
+            <span className="md:ml-3 hidden md:flex w-[auto] text-[#ffa500]">
+              Hello, {name}
+            </span>
+            <span className="md:hidden text-white">
+              <strong>{name}</strong>
+            </span>
             <span className="md:ml-3 mt-0 mb-0 hidden md:flex">
-              <Link to='/login'><strong className="text-[white]">Sign in</strong></Link> 
+              <button onClick={signoutHandler}>
+                <strong className="text-[white]">Sign out</strong>
+              </button>
             </span>
           </div>
-          <span className="flex md:hidden m-0 p-0"><FaRegUser className="m-0 p-0 text-xl text-white  "/></span>
+          <span className="flex md:hidden m-0 p-0">
+            <FaRegUser
+              // onClick={logout}
+              onClick={()=>{
+                setLogoutModal(true)
+                setOverflow("hidden")
+              }}
+              className="m-0 p-0 text-xl text-white  "
+            />
+          </span>
 
           <div>
-            <Link to='/cart'>
+            <Link to="/cart">
               <img className="w-[2em] mr-2" src="icons/cart.svg" alt="" />
             </Link>
           </div>
         </div>
       </div>
 
-
       {/* SEARCH INPUT FOR MOBILE VIEW */}
       <div className="w-[100%] mt-2 flex justify-center items-center md:hidden py-1 px-2 ">
         <div className="flex bg-white rounded w-[inherit]">
-        <input className="focus:outline-none text-center rounded w-[90%] p-2" type="text" />
-        <span className="w-[10%] px-2 py-2 bg-[orange] rounded "><img className="w-[2em]" src="icons/search.svg" alt="" /></span>
+          <input
+            className="focus:outline-none text-center rounded w-[90%] p-2"
+            type="text"
+          />
+          <span className="w-[10%] px-2 py-2 bg-[orange] rounded ">
+            <img className="w-[2em]" src="icons/search.svg" alt="" />
+          </span>
         </div>
       </div>
 
-      {
-      modal && 
-      ReactDOM.createPortal(<NavModal setModal={setModal}/>, document.getElementById("portal"))
-       
-      }
-      
+      {modal &&
+        ReactDOM.createPortal(
+          <NavModal name={name} setModal={setModal} setOverflow={setOverflow} />,
+          document.getElementById("portal")
+        )}
+
+
+      {logoutModal &&
+        ReactDOM.createPortal(
+          <SignOutModal setLogoutModal={setLogoutModal} setOverflow={setOverflow} logout={logout}/>,
+          document.getElementById("portal")
+        )}
     </div>
   );
 };

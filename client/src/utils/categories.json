@@ -1,0 +1,81 @@
+[
+  {
+    "id": 0,
+    "name": "DIGITAL DEVICES",
+    "collection": [
+      {
+        "id": 2619525011,
+        "name": "Appliances"
+      },
+
+      {
+        "id": 2335752011,
+        "name": "Cell Phones & Accessories"
+      },
+      {
+        "id": 468642,
+        "name": "Video Games"
+      }
+    ]
+  },
+
+  {
+    "id": 1,
+    "name": "COMPUTERS",
+    "collection": [
+      {
+        "id": 13896617011,
+        "name": "Computers & Tablets"
+      },
+
+      {
+        "id": 3011391011,
+        "name": "Laptop Accessories"
+      },
+      {
+        "id": 1292115011,
+        "name": "Monitors"
+      }
+    ]
+  },
+
+  {
+    "id": 2,
+    "name": "FASHION",
+    "collection": [
+      {
+        "id": 16225018011,
+        "name": "Women's Fashion"
+      },
+
+      {
+        "id": 16225019011,
+        "name": "Men's Fashion"
+      },
+      {
+        "id": 16225005011,
+        "name": "Baby Clothing & Shoes"
+      }
+    ]
+  },
+
+  {
+    "id": 3,
+    "name": "ARTS AND CRAFTS",
+    "collection": [
+      {
+        "id": 12896081,
+        "name": "Beading & Jewelry Making"
+      },
+
+      {
+        "id": "12897221",
+        "name": "Knitting & Crocheting"
+      },
+      {
+        "id": 2747968011,
+        "name": "Painting & Art Supplies"
+      }
+    ]
+  }
+]

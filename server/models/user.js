@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:[true, 'please enter a password' ],
         minlength:[6, 'password must be more than six characters'],
-        select:false
     }
 });
 
@@ -30,6 +29,18 @@ userSchema.pre('save', async function(next)
         next();
     });
 
+    userSchema.statics.login = async function (email, password){
+        const user = await this.findOne({email});
+    
+        if(user){
+            const auth = await bcrypt.compare(password, user.password);
+            if(auth){
+                return user;
+            }
+            throw Error('incorrect password');
+        }
+        throw Error('incorrect email');
+    }
 
 const User = mongoose.model('User',userSchema);
 
