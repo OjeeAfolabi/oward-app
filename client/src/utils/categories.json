@@ -2,16 +2,20 @@
   {
     "id": 0,
     "name": "DIGITAL DEVICES",
+    "image":"https://res.cloudinary.com/dxzdroytt/image/upload/v1718319272/project%20images/digital_vjg6nm.jpg",
+
     "collection": [
+      {
+        "id": 2335752011,
+        "name": "Cell Phones & Accessories"
+
+      },
+      
       {
         "id": 2619525011,
         "name": "Appliances"
       },
 
-      {
-        "id": 2335752011,
-        "name": "Cell Phones & Accessories"
-      },
       {
         "id": 468642,
         "name": "Video Games"
@@ -22,6 +26,7 @@
   {
     "id": 1,
     "name": "COMPUTERS",
+    "image": "https://res.cloudinary.com/dyftfueq7/image/upload/v1718016522/computers_xyjwh0.jpg",
     "collection": [
       {
         "id": 13896617011,
@@ -42,6 +47,7 @@
   {
     "id": 2,
     "name": "FASHION",
+    "image": "https://res.cloudinary.com/dxzdroytt/image/upload/v1718319272/project%20images/fashion_blwoqn.jpg",
     "collection": [
       {
         "id": 16225018011,
@@ -62,6 +68,7 @@
   {
     "id": 3,
     "name": "ARTS AND CRAFTS",
+    "image":"https://res.cloudinary.com/dyftfueq7/image/upload/v1718016522/arts_vkpldf.jpg",
     "collection": [
       {
         "id": 12896081,
@@ -69,13 +76,47 @@
       },
 
       {
-        "id": "12897221",
+        "id": 12897221,
         "name": "Knitting & Crocheting"
       },
       {
         "id": 2747968011,
         "name": "Painting & Art Supplies"
       }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "FOOTWEARS & SHOES",
+    "image":"https://res.cloudinary.com/dyftfueq7/image/upload/v1718016521/shoe_nhfvle.jpg",
+    "collection": [
+      {
+        "id": 679255011,
+        "name": "Men's Shoes"
+      },
+
+      {
+        "id": 679337011,
+        "name": "Women's Shoes"
+      }
+    ]
+  },
+
+  {
+    "id": 5,
+    "name": "ACCESORIES",
+    "image":"https://res.cloudinary.com/dxzdroytt/image/upload/v1718319272/project%20images/accessories_un7isr.jpg",
+    "collection": [
+      {
+        "id": 2474937011,
+        "name": "Men"
+      },
+
+      {
+        "id": 2474936011 ,
+        "name": "Women"
+      }
+      
     ]
   }
 ]

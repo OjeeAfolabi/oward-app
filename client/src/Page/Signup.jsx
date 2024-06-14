@@ -35,7 +35,7 @@ const Signup = () => {
     
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/oward/signup",
+        `${import.meta.env.VITE_OWARD_URL}/signup`,
         body,
         config
       );

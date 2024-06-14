@@ -4,7 +4,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const ProtectedRoutes = ({setLoggedin,loggedin, setName}) => {
+const ProtectedRoutes = ({setLoggedin,loggedin, setName, setCart,setId}) => {
   const [auth, setAuth] = useState();
   const [ready, setReady] = useState(false);
 
@@ -24,6 +24,9 @@ const ProtectedRoutes = ({setLoggedin,loggedin, setName}) => {
       // console.log(res.data.data);
       let name = res.data.data.name
       setName(name.split(" ")[0])
+      setCart(res.data.data.cart)
+      setId(res.data.data._id)
+      // setUser(res.data.data)
      
 
       return res.data.data;
@@ -37,6 +40,7 @@ const ProtectedRoutes = ({setLoggedin,loggedin, setName}) => {
     const fetch = async () => {
       try {
         const user = await getUser();
+      
         if (user) {
           setAuth(true);
           setReady(true);

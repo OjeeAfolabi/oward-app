@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:[true, 'please enter a password' ],
         minlength:[6, 'password must be more than six characters'],
+    },
+    cart:{
+        type:Array,
+        default:[]
     }
 });
 

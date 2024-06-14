@@ -1,13 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "./components/Page/Login";
-import Signup from "./components/Page/Signup";
-import Cart from "./components/Page/Cart";
-import SharedComponent from "./components/Page/Shared/SharedComponent";
-import Home from "./components/Page/Home";
-import Product from "./components/Page/SingleProduct";
+import Login from "./Page/Login";
+import Signup from "./Page/Signup";
+import Cart from "./Page/Cart";
+import SharedComponent from "./Page/Shared/SharedComponent";
+import Home from "./Page/Home";
+import Products from "./Page/Products";
 import axios from "axios";
-import ProtectedRoutes from "./components/Page/Shared/ProtectedRoutes";
+import ProtectedRoutes from "./Page/Shared/ProtectedRoutes";
 import {useState } from "react";
+import SingleProduct from "./Page/SingleProduct";
+import Search from "./components/Search";
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
@@ -15,6 +17,8 @@ axios.defaults.withCredentials = true;
 function App() {
   const [loggedin, setLoggedin] = useState();
   const [name, setName] = useState();
+  const [cart, setCart] = useState();
+  const[id,setId]= useState()
 
   return (
     <Routes>
@@ -25,6 +29,8 @@ function App() {
         element={
           <ProtectedRoutes
             setName={setName}
+            setCart={setCart}
+            setId={setId}
             setLoggedin={setLoggedin}
             loggedin={loggedin}
           />
@@ -35,13 +41,20 @@ function App() {
           element={
             <SharedComponent
               name={name}
+              id={id}
+              cart={cart}
               setLoggedin={setLoggedin}
             />
           }
         >
           <Route index element={<Home />} />
-          <Route path="products" element={<Product />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path=":productsID" element={<Products />} />
+          <Route path=":productsID/:singleID" element={<SingleProduct setCart={setCart}/>} />
+          <Route path="cart" element={<Cart cart={cart} setCart={setCart} userID={id} />} />
+          {/* <Route path="payment" element={<Payment/>} /> */}
+
+          <Route path="search" element={<Search/>} />
+
         </Route>
       </Route>
     </Routes>

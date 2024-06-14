@@ -1,9 +1,10 @@
 const dotenv = require("dotenv");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 dotenv.config({
-  path: "./.env",
+  path: "../.env",
 });
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -97,8 +98,121 @@ const logoutUser = async (req, res) => {
   }
 };
 
+const getAllProducts = async (req, res) => {
+  let id = req.body.productsID;
+  const options = {
+    method: "GET",
+    url: `${process.env.AMAZON_URL}/products-by-category`,
+    params: {
+      category_id: `${id}`,
+      page: "1",
+      country: "US",
+      sort_by: "RELEVANCE",
+      product_condition: "ALL",
+    },
+    headers: {
+      "x-rapidapi-key": `${process.env.AMAZON_KEY}`,
+      "x-rapidapi-host": `${process.env.AMAZON_HOST}`,
+    },
+  };
+  try {
+    const response = await axios.request(options);
+
+    res.status(200).json({
+      status: "success",
+      data: response.data.data.products,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      data: error.message,
+    });
+  }
+};
+
+const getSingleProduct = async (req, res) => {
+  let id = req.body.singleID;
+
+  console.log("id", id);
+  const options = {
+    method: "GET",
+    url: `${process.env.AMAZON_URL}/product-details`,
+    params: {
+      asin: `${id}`,
+      country: "US",
+    },
+    headers: {
+      "x-rapidapi-key": `${process.env.AMAZON_KEY}`,
+      "x-rapidapi-host": `${process.env.AMAZON_HOST}`,
+    },
+  };
+  try {
+    const response = await axios.request(options);
+
+    res.status(200).json({
+      status: "success",
+      data: response.data.data,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      data: error.message,
+    });
+  }
+};
+
+const searchProducts = async (req, res) => {
+  let search = req.body.search;
+  const options = {
+    method: "GET",
+    url: `${process.env.AMAZON_URL}/search`,
+    params: {
+      query: `${search}`,
+      page: "1",
+      country: "US",
+      sort_by: "RELEVANCE",
+      product_condition: "ALL",
+    },
+    headers: {
+      "x-rapidapi-key": `${process.env.AMAZON_KEY}`,
+      "x-rapidapi-host": `${process.env.AMAZON_HOST}`,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    res.status(200).json({
+      status: "success",
+      data: response.data.data.products,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      data: error.message,
+    });
+  }
+};
+
+const AddToCart = async (req, res) => {
+  let cartValue = req.body.cartValue;
+  let id = req.body.id;
+  try {
+    const query = await User.findByIdAndUpdate(id, { cart: cartValue });
+    res.status(201).json({ status: "success", data: query });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      data: err.message,
+    });
+  }
+};
+
 module.exports = {
   signUp,
   loginUser,
   logoutUser,
+  getAllProducts,
+  getSingleProduct,
+  searchProducts,
+  AddToCart,
 };

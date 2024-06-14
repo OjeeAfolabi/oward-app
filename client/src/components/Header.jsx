@@ -5,22 +5,44 @@ import NavModal from "./UI/NavModal";
 import SignOutModal from "./UI/SignOutModal";
 import ReactDOM from "react-dom";
 import { FaRegUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Header = ({ setLoggedin, name, setOverflow }) => {
+const Header = ({
+  setLoggedin,
+  name,
+  search,
+  setSearch,
+  setCache,
+  setSearchClick,
+  setOverflow,
+  cart
+}) => {
   const [modal, setModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
 
-  const clickHandler = () => {
-    setModal(true);
-    setOverflow("hidden")
+  const navigate = useNavigate();
+
+  const onChangHandler = (e) => {
+    setSearch(e.target.value);
   };
 
-  const signoutHandler =()=>{
+  const clickHandler = () => {
+    setModal(true);
+    setOverflow("hidden");
+  };
+
+  const searchClickHandler = () => {
+    setCache(search);
+    setSearchClick((prev) => !prev);
+    navigate("/search");
+    setSearch("");
+  };
+
+  const signoutHandler = () => {
     setLogoutModal(true);
-    setOverflow("hidden")
-  }
+    setOverflow("hidden");
+  };
 
   const logout = async () => {
     const config = {
@@ -31,7 +53,7 @@ const Header = ({ setLoggedin, name, setOverflow }) => {
 
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/v1/oward/logout",
+        `${import.meta.env.VITE_OWARD_URL}/logout`,
         config
       );
       if (res) {
@@ -50,29 +72,33 @@ const Header = ({ setLoggedin, name, setOverflow }) => {
             <img
               onClick={clickHandler}
               className="w-[40px] ml-2"
-              src="icons/hamburger.svg"
+              src="/icons/hamburger.svg"
               alt=""
             />
           </button>
-          <img
-            className="w-[80px] m-0 h-[40px]"
-            src="icons/amazon.svg"
-            alt=""
-          />
-        </div>
-
-        <div className="md:flex hidden bg-white rounded">
-          <input
-            className="focus:outline-none text-center rounded w-[30rem]"
-            type="text"
-          />
-          <span>
+          <Link to="/">
             <img
-              className="w-[2em] bg-[orange] rounded p-1"
-              src="icons/search.svg"
+              className="md:px-[1em] ml-[0.5em] md:w-[7em] w-[5em] mt-[0.3em] h-[2em] "
+              src="/images/owardpng.PNG"
               alt=""
             />
-          </span>
+          </Link>
+        </div>
+
+        <div className="md:flex hidden  bg-white rounded">
+          <input
+            className="focus:outline-none text-center rounded  w-[30rem]"
+            type="text"
+            value={search}
+            onChange={onChangHandler}
+          />
+          <button onClick={searchClickHandler}>
+            <img
+              className="w-[2em] bg-[#ffa500] rounded p-1"
+              src="/icons/search.svg"
+              alt=""
+            />
+          </button>
         </div>
 
         <div className="flex items-center gap-[1rem] md:gap-[1em] ">
@@ -92,15 +118,18 @@ const Header = ({ setLoggedin, name, setOverflow }) => {
           <span className="flex md:hidden m-0 p-0">
             <FaRegUser
               // onClick={logout}
-              onClick={()=>{
-                setLogoutModal(true)
-                setOverflow("hidden")
+              onClick={() => {
+                setLogoutModal(true);
+                setOverflow("hidden");
               }}
               className="m-0 p-0 text-xl text-white  "
             />
           </span>
 
-          <div>
+          <div className="relative">
+            <div className="bg-[#ffa500] text-white text-[0.8em] rounded-[50%] absolute right-0 top-0 w-[1em] h-[1em] flex items-center justify-center p-2">
+             {cart.length}
+            </div>
             <Link to="/cart">
               <img className="w-[2em] mr-2" src="icons/cart.svg" alt="" />
             </Link>
@@ -123,14 +152,21 @@ const Header = ({ setLoggedin, name, setOverflow }) => {
 
       {modal &&
         ReactDOM.createPortal(
-          <NavModal name={name} setModal={setModal} setOverflow={setOverflow} />,
+          <NavModal
+            name={name}
+            setModal={setModal}
+            setOverflow={setOverflow}
+          />,
           document.getElementById("portal")
         )}
 
-
       {logoutModal &&
         ReactDOM.createPortal(
-          <SignOutModal setLogoutModal={setLogoutModal} setOverflow={setOverflow} logout={logout}/>,
+          <SignOutModal
+            setLogoutModal={setLogoutModal}
+            setOverflow={setOverflow}
+            logout={logout}
+          />,
           document.getElementById("portal")
         )}
     </div>

@@ -28,7 +28,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/oward/login",
+        `${import.meta.env.VITE_OWARD_URL}/login`,
         body,
         config
       );
@@ -37,7 +37,7 @@ const Login = () => {
         navigate("/");
       }
     } catch (error) {
-      // console.log(error.response.data.data);
+       console.log(error.response.data.data);
       setData((prev) => {
         return {
           ...prev,
@@ -65,9 +65,7 @@ const Login = () => {
       <form onSubmit={loginUser}>
         <div className="flex justify-center items-center flex-col ">
           <span className="bg-slate-900 w-[100%] flex justify-center">
-            <Link to="/">
-              <img className="w-20" src="icons/amazon.svg " alt="" />
-            </Link>
+              <img className="w-[7em] py-[1em]" src="/images/owardpng.PNG " alt="" />
           </span>
           <div className="flex justify-center items-center w-[100%] mt-4 ">
             <div className="bg-slate-300 flex flex-col border border-slate-700 mb-10 mt-8 p-4 gap-[1rem] w-[90%] items-left justify-left rounded md:w-[40%] md:mb-[1rem]">
@@ -81,7 +79,7 @@ const Login = () => {
                   placeholder="E-mail"
                   value={data.email}
                   onChange={(e) => setData({ ...data, email: e.target.value })}
-                  type="text"
+                  type="email"
                   className="w-[100%] border border-slate-700 rounded p-[0.3rem] placeholder:text-slate-400"
                 />
               </div>
