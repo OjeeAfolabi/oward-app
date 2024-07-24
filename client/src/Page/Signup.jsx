@@ -75,7 +75,7 @@ const Signup = () => {
         <div className="flex justify-center items-center flex-col ">
           <span className="bg-slate-900 w-[100%] flex justify-center">
             <Link to="/">
-              <img className="w-20" src="/images/owardpng.PNG " alt="" />
+              <img className="w-[7em] py-[1em]" src="/images/owardpng.PNG " alt="" />
             </Link>
           </span>
           <div className="flex justify-center items-center w-[100%] mt-4 ">
