@@ -7,10 +7,9 @@ const {signUp, loginUser, logoutUser, getAllProducts, getSingleProduct, searchPr
 const {requireAuth} = require('../middleware/requireAuth');
 const {getUser} = require('../controllers/userController');
 
-router.use(cors({
-    credentials: true,
-    origin:'http://localhost:5173'
-}))
+// router.use(cors({
+//     credentials: true,
+// }))
 
 
 router.route('/signup').post(signUp);

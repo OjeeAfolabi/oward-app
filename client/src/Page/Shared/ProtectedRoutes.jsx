@@ -4,7 +4,13 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const ProtectedRoutes = ({setLoggedin,loggedin, setName, setCart,setId}) => {
+const ProtectedRoutes = ({
+  setLoggedin,
+  loggedin,
+  setName,
+  setCart,
+  setId,
+}) => {
   const [auth, setAuth] = useState();
   const [ready, setReady] = useState(false);
 
@@ -18,16 +24,15 @@ const ProtectedRoutes = ({setLoggedin,loggedin, setName, setCart,setId}) => {
 
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/v1/oward/user",
+        `${import.meta.env.VITE_OWARD_URL}/user`,
         config
       );
       // console.log(res.data.data);
-      let name = res.data.data.name
-      setName(name.split(" ")[0])
-      setCart(res.data.data.cart)
-      setId(res.data.data._id)
+      let name = res.data.data.name;
+      setName(name.split(" ")[0]);
+      setCart(res.data.data.cart);
+      setId(res.data.data._id);
       // setUser(res.data.data)
-     
 
       return res.data.data;
     } catch (error) {
@@ -40,7 +45,7 @@ const ProtectedRoutes = ({setLoggedin,loggedin, setName, setCart,setId}) => {
     const fetch = async () => {
       try {
         const user = await getUser();
-      
+
         if (user) {
           setAuth(true);
           setReady(true);
