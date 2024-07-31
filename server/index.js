@@ -8,12 +8,6 @@ dotenv.config({
 
 //Database connection
 mongoose.connect(process.env.MONGO_URL
-//     ,{
-//     useNewUrlParser:true,
-//     useCreateIndex:true,
-//     useUnifiedToplogy:true,
-//     useFindAndModify:false
-// }
 )
 .then(() => console.log('Database Connected'))
 .catch((err) => console.log('Database not connected', err))

@@ -7,11 +7,6 @@ const {signUp, loginUser, logoutUser, getAllProducts, getSingleProduct, searchPr
 const {requireAuth} = require('../middleware/requireAuth');
 const {getUser} = require('../controllers/userController');
 
-// router.use(cors({
-//     credentials: true,
-// }))
-
-
 router.route('/signup').post(signUp);
 router.route('/login').post (loginUser);
 router.route('/logout').get(logoutUser);

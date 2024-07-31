@@ -21,7 +21,7 @@ const Login = () => {
 
     const config = {
       headers: {
-        withCredentials: true,
+        "Content-Type": "application/json",
       },
     };
     const body = JSON.stringify({ email, password });
