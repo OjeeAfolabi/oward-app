@@ -5,17 +5,14 @@ import Cart from "./Page/Cart";
 import SharedComponent from "./Page/Shared/SharedComponent";
 import Home from "./Page/Home";
 import Products from "./Page/Products";
-// import axios from "axios";
+import axios from "axios";
 import ProtectedRoutes from "./Page/Shared/ProtectedRoutes";
 import {useState } from "react";
 import SingleProduct from "./Page/SingleProduct";
 import Search from "./components/Search";
 
-// axios.defaults.baseURL = "http://localhost:3000";
-// axios.defaults.withCredentials = true;
-// axios.defaults.headers.get['Accepts'] = 'application/json';
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:5173'; // Replace with your actual origin
-// axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+axios.defaults.baseURL =  `${import.meta.env.VITE_BASE_URL}`;
+axios.defaults.withCredentials = true;
 
 function App() {
   const [loggedin, setLoggedin] = useState();
