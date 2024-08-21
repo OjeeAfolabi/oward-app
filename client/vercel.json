@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path(.*)",
+      "destination": "https://ill-paulita-jaysly-7f0f4cfb.koyeb.app/api/:path"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

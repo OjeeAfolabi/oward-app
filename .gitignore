@@ -36,7 +36,7 @@ server/dist
 server/dist-ssr
 server/*.local
 server/*.env
-server/package-lock.json
+#server/package-lock.json
 
 # Editor directories and files
 server/.vscode/*
