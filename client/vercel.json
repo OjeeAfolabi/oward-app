@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path(.*)",
-      "destination": "https://ill-paulita-jaysly-7f0f4cfb.koyeb.app/api/:path"
+      "destination": "https://additional-mink-jaysonafolabi-264e0ed8.koyeb.app/api/:path"
     },
     {
       "source": "/(.*)",
