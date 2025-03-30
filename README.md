@@ -7,6 +7,9 @@
 ## Register
 ![image](https://github.com/user-attachments/assets/c688946e-16de-48da-8145-e0bead1b97bf)
 
+## The Landing Page
+![image](https://github.com/user-attachments/assets/fa5f4916-6c92-4429-b048-da0e4cff4932)
+
 
 
 
