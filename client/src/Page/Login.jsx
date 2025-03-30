@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import LoginSignfooter from "./LoginSignfooter";
 import { LiaHandPointLeftSolid } from "react-icons/lia";
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -34,7 +34,9 @@ const Login = () => {
       );
 
       if (res) {
-        console.log("resLogin", res.data);
+        console.log(toast.success("Login successful"));
+        // toast.success("resLogin", res.data);
+        // console.log("login success");
         navigate("/");
       }
     } catch (error) {
@@ -50,7 +52,7 @@ const Login = () => {
 
   useEffect(() => {
     if (data.error) {
-      toast(data.error);
+      toast.error(data.error);
       setData((prev) => {
         return {
           ...prev,
@@ -62,7 +64,7 @@ const Login = () => {
 
   return (
     <div>
-      <Toaster position="center-top" toastOptions={{ duration: 2000 }} />
+      <ToastContainer />
       <form onSubmit={loginUser}>
         <div className="flex justify-center items-center flex-col ">
           <span className="bg-slate-900 w-[100%] flex justify-center">
