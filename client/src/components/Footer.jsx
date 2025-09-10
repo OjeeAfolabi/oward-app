@@ -18,7 +18,7 @@ const Footer = () => {
           <p className="text-left">Advertise your products</p>
         </div>
       </div>
-      <span className="p-[1rem] md:p-[2rem]">Copyright &copy; <strong>2024</strong></span>
+      <span className="p-[1rem] md:p-[2rem]">Copyright &copy; <strong>2025</strong></span>
 
     </div>
   );

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import LoginSignfooter from "./LoginSignfooter";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -30,20 +30,35 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_OWARD_URL}/signup`,
+        "http://localhost:3000/api/v1/oward/signup",
         body,
         config
       );
+
       if (res) {
-        toast.success("Registration successful");
+        toast.success("SignUp successful", {
+          position: "top-right",
+          autoClose: 1000,
+          closeOnClick: true,
+          hideProgressBar: true,
+          theme: "light",
+          style: {
+            backgroundColor: "white",
+            color: "green",
+          },
+        });
         navigate("/");
       }
     } catch (error) {
-      // console.log(error.response.data.data);
+      toast.error(error.response.data.data, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+      });
       setData((prev) => {
         return {
           ...prev,
-          error: error.response.data.data,
+          error: error.response,
         };
       });
     }
@@ -51,7 +66,6 @@ const Signup = () => {
 
   useEffect(() => {
     if (data.error) {
-      toast.error(data.error);
       setData((prev) => {
         return {
           ...prev,
@@ -63,8 +77,7 @@ const Signup = () => {
 
   return (
     <div>
-      <ToastContainer />
-      <form>
+      <form className="bg-gradient-to-br from-blue-200 to-yellow-100">
         <div className="flex justify-center items-center flex-col ">
           <span className="bg-slate-900 w-[100%] flex justify-center">
             <Link to="/">
@@ -75,7 +88,7 @@ const Signup = () => {
               />
             </Link>
           </span>
-          <div className="flex justify-center items-center w-[100%] mt-4 ">
+          <div className="flex justify-center items-center w-[100%] mt-12">
             <div
               id="size"
               className="bg-slate-300 flex flex-col border border-slate-700  mb-10 mt-8 p-4 gap-[1rem] w-[90%] items-left justify-left rounded md:w-[40%] md:mb-[1rem] md:gap-[0.3rem] md:pb-1 "

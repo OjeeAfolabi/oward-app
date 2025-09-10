@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
+const { amazonApi } = require("../constants/amazon");
 
 dotenv.config({
   path: "../.env",
@@ -40,6 +41,7 @@ const signUp = async (req, res) => {
     }
 
     const user = await User.create({ name, email, password });
+
     const token = createToken(user._id);
     res.cookie("jwt", token, {
       httpOnly: true,
@@ -100,27 +102,13 @@ const logoutUser = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
   let id = req.body.productsID;
-  const options = {
-    method: "GET",
-    url: `${process.env.AMAZON_URL}/products-by-category`,
-    params: {
-      category_id: `${id}`,
-      page: "1",
-      country: "US",
-      sort_by: "RELEVANCE",
-      product_condition: "ALL",
-    },
-    headers: {
-      "x-rapidapi-key": `${process.env.AMAZON_KEY}`,
-      "x-rapidapi-host": `${process.env.AMAZON_HOST}`,
-    },
-  };
+  //
   try {
-    const response = await axios.request(options);
+    const response = amazonApi.find((item) => item.id == id);
 
     res.status(200).json({
       status: "success",
-      data: response.data.data.products,
+      data: response.data,
     });
   } catch (error) {
     res.status(400).json({
@@ -131,27 +119,16 @@ const getAllProducts = async (req, res) => {
 };
 
 const getSingleProduct = async (req, res) => {
-  let id = req.body.singleID;
+  let asinId = req.body.asinId;
+  let catId = req.body.catId;
 
-  console.log("id", id);
-  const options = {
-    method: "GET",
-    url: `${process.env.AMAZON_URL}/product-details`,
-    params: {
-      asin: `${id}`,
-      country: "US",
-    },
-    headers: {
-      "x-rapidapi-key": `${process.env.AMAZON_KEY}`,
-      "x-rapidapi-host": `${process.env.AMAZON_HOST}`,
-    },
-  };
   try {
-    const response = await axios.request(options);
+    const category = amazonApi.find((item) => item.id == catId);
+    const response = category.data.find((item) => item.asin == asinId);
 
     res.status(200).json({
       status: "success",
-      data: response.data.data,
+      data: response,
     });
   } catch (error) {
     res.status(400).json({
@@ -163,27 +140,21 @@ const getSingleProduct = async (req, res) => {
 
 const searchProducts = async (req, res) => {
   let search = req.body.search;
-  const options = {
-    method: "GET",
-    url: `${process.env.AMAZON_URL}/search`,
-    params: {
-      query: `${search}`,
-      page: "1",
-      country: "US",
-      sort_by: "RELEVANCE",
-      product_condition: "ALL",
-    },
-    headers: {
-      "x-rapidapi-key": `${process.env.AMAZON_KEY}`,
-      "x-rapidapi-host": `${process.env.AMAZON_HOST}`,
-    },
-  };
 
   try {
-    const response = await axios.request(options);
+    let response = [];
+    for (category of amazonApi) {
+      for (let item of category.data) {
+        if (item.product_title.toLowerCase().includes(search.toLowerCase())) {
+          item.catId = category.id;
+          response.push(item);
+        }
+      }
+    }
+
     res.status(200).json({
       status: "success",
-      data: response.data.data.products,
+      data: response,
     });
   } catch (error) {
     res.status(400).json({
