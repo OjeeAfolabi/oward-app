@@ -29,7 +29,7 @@ const Products = () => {
         body,
         config
       );
-      // console.log('result',res.data.data)
+      console.log('all products result',res)
       setProducts(res.data.data);
       setLoading(false)
     } catch (err) {

@@ -48,6 +48,7 @@ const Login = () => {
         navigate("/");
       }
     } catch (error) {
+      // console.log("login error",error);
       toast.error(error.response.data.data, {
         position: "top-right",
         autoClose: 1000,

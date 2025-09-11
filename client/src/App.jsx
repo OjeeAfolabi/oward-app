@@ -13,7 +13,7 @@ import { useState } from "react";
 import SingleProduct from "./Page/SingleProduct";
 import Search from "./components/Search";
 
-axios.defaults.baseURL = `${import.meta.env.VITE_BASE_URL}`;
+axios.defaults.baseURL = `${import.meta.env.VITE_OWARD_URL}`;
 axios.defaults.withCredentials = true;
 
 function App() {

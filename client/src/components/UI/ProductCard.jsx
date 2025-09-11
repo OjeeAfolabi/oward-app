@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ item }) => {
 
   return (
-    <Link to ={`${item.asin}`} className="w-[40%] md:w-[25%] flex flex-col items-center gap-1 md:gap-2 px-2 py-4 rounded border-2 border-slate-200  m-3">
+    <Link to ={`${item.asin}-${item.catId}`} className="w-[40%] md:w-[25%] flex flex-col items-center gap-1 md:gap-2 px-2 py-4 rounded border-2 border-slate-200  m-3">
       <div className=" flex justify-center h-[10em] lg:h-[16em] w-[100%]">
         <img className="h-[100%]" src={item["product_photo"]} alt="" />
       </div>

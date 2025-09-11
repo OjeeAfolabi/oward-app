@@ -11,6 +11,10 @@ const SingleProduct = ({ setCart }) => {
 
   const { singleID } = useParams();
 
+  const idList = singleID.split("-");
+  const asinId = idList[0];
+  const catId = idList[1];
+
   const context = useOutletContext();
   const overflow = context.value;
 
@@ -49,7 +53,7 @@ const SingleProduct = ({ setCart }) => {
         "Content-Type": "application/json",
       },
     };
-    const body = { singleID: singleID };
+    const body = { asinId, catId };
 
     try {
       const res = await axios.post(
@@ -57,7 +61,7 @@ const SingleProduct = ({ setCart }) => {
         body,
         config
       );
-      // console.log('result',res.data.data)
+      console.log('single products result',res)
       setSingleProduct(res.data.data);
       setLoading(false);
     } catch (err) {

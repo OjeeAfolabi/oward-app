@@ -104,11 +104,16 @@ const getAllProducts = async (req, res) => {
   let id = req.body.productsID;
   //
   try {
-    const response = amazonApi.find((item) => item.id == id);
+    const response = [];
+    const amazonApiRes = amazonApi.find((item) => item.id == id);
+    for (product of amazonApiRes.data) {
+      product.catId = id;
+      response.push(product);
+    }
 
     res.status(200).json({
       status: "success",
-      data: response.data,
+      data: response,
     });
   } catch (error) {
     res.status(400).json({
