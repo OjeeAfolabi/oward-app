@@ -9,7 +9,7 @@
     "client": " npm run dev --prefix ../client",
     "server": " nodemon index.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "build": "npm run build"
+    "build": "npm install"
   },
   "author": "",
   "license": "ISC",
