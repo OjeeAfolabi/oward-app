@@ -18,13 +18,6 @@ const SingleProduct = ({ setCart }) => {
   const context = useOutletContext();
   const overflow = context.value;
 
-  // console.log("userID", context.userID)
-  // console.log("userCart", [...context.userCart,singleproduct])
-  // console.log("single",singleproduct )
-
-  // const [cartcache, setCartCache] = useState([...context.userCart])
-  // console.log("singleproduct", singleproduct)
-
   const AddToCart = async () => {
     const config = {
       headers: {
@@ -40,7 +33,6 @@ const SingleProduct = ({ setCart }) => {
         body,
         config
       );
-      // console.log(res.data);
       setCart((prev) => [...prev, singleproduct]);
     } catch (error) {
       console.log(error.response);

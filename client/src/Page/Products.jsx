@@ -49,7 +49,7 @@ const Products = () => {
         await getProducts();
       };
       fetch();
-      // setLoading(false)
+     
     }
   }, [productsID]);
 
