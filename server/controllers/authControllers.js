@@ -102,7 +102,7 @@ const logoutUser = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
   let id = req.body.productsID;
-  //
+  //comments here
   try {
     const response = [];
     const amazonApiRes = amazonApi.find((item) => item.id == id);
