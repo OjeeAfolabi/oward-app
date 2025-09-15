@@ -22,17 +22,17 @@ const Login = () => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        withCredentials: true,
       },
     };
     const body = JSON.stringify({ email, password });
 
+    const url = `${import.meta.env.VITE_OWARD_URL}/login`;
+
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_OWARD_URL}/login`,
-        body,
-        config
-      );
+      console.log("body", body);
+      const res = await axios.post(url, body, config, {
+        withCredentials: true,
+      });
 
       if (res) {
         toast.success("Log in successful!", {
