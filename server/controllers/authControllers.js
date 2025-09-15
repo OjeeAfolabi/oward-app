@@ -68,9 +68,13 @@ const loginUser = async (req, res) => {
     }
 
     const user = await User.login(email, password);
+    console.log("user", user);
     const token = createToken(user._id);
+    console.log("token", token);
     res.cookie("jwt", token, {
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
       maxAge: maxAge * 1000,
     });
     res.status(201).json({ user });
@@ -85,7 +89,9 @@ const loginUser = async (req, res) => {
 const logoutUser = async (req, res) => {
   try {
     res.cookie("jwt", "", {
-      // httpOnly: true,
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
       maxAge: 1,
     });
     res.status(200).json({

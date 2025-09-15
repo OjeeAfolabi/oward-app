@@ -7,11 +7,18 @@ const cors = require("cors");
 
 dotenv.config({ path: "./.env" });
 
+// const corsOptions = {
+//   origin: "*",
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   allowedHeaders: "Content-Type",
+//   optionsSuccessStatus: 204
+// };
+
 const corsOptions = {
   origin: `${process.env.BASE_URL}`,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: "Content-Type,Authorization",
-  "Access-Control-Allow-Credentials": true,
+  allowedHeaders: ["Content-Type"],
+  // "Access-Control-Allow-Credentials": true,
   credentials: true,
   optionsSuccessStatus: 204,
 };
