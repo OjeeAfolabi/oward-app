@@ -32,7 +32,10 @@ const Signup = () => {
       const res = await axios.post(
         "http://localhost:3000/api/v1/oward/signup",
         body,
-        config
+        config,
+        {
+        withCredentials: true,
+      }
       );
 
       if (res) {

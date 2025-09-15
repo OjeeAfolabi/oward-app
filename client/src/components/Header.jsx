@@ -54,7 +54,10 @@ const Header = ({
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_OWARD_URL}/logout`,
-        config
+        config,
+        {
+        withCredentials: true,
+      }
       );
       if (res) {
         setLoggedin(false);
