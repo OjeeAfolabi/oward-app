@@ -28,15 +28,12 @@ const Signup = () => {
     };
     const body = JSON.stringify({ name, email, password, confirmPassword });
 
+    const url = `${import.meta.env.VITE_OWARD_URL}/signup`;
+
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/v1/oward/signup",
-        body,
-        config,
-        {
+      const res = await axios.post(url, body, config, {
         withCredentials: true,
-      }
-      );
+      });
 
       if (res) {
         toast.success("SignUp successful", {

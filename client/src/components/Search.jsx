@@ -25,11 +25,14 @@ const Search = () => {
       const res = await axios.post(
         `${import.meta.env.VITE_OWARD_URL}/search`,
         body,
-        config
+        config,
+        {
+          withCredentials: true,
+        }
       );
       // console.log('result',res.data.data)
       setSearchProducts(res.data.data);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +45,7 @@ const Search = () => {
   useEffect(() => {
     // console.log('search is running',context.cacheValue)
     setSearchProducts(null);
-    setLoading(true)
+    setLoading(true);
     if (context.cacheValue) {
       const fetch = async () => {
         await getSearchProducts();
@@ -54,7 +57,8 @@ const Search = () => {
   return (
     <div className="mt-[8em] lg:mt-[6em] flex w-[100%] flex-wrap justify-center">
       {loading && <Loading />}
-      {searchProducts && !loading &&
+      {searchProducts &&
+        !loading &&
         searchProducts.map((item, index) => (
           <ProductCard key={index} item={item} />
         ))}
