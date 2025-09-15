@@ -16,7 +16,7 @@ const Header = ({
   setCache,
   setSearchClick,
   setOverflow,
-  cart
+  cart,
 }) => {
   const [modal, setModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
@@ -56,8 +56,8 @@ const Header = ({
         `${import.meta.env.VITE_OWARD_URL}/logout`,
         config,
         {
-        withCredentials: true,
-      }
+          withCredentials: true,
+        }
       );
       if (res) {
         setLoggedin(false);
@@ -131,7 +131,7 @@ const Header = ({
 
           <div className="relative">
             <div className="bg-[#ffa500] text-white text-[0.8em] rounded-[50%] absolute right-0 top-0 w-[1em] h-[1em] flex items-center justify-center p-2">
-             {cart.length}
+              {cart.length}
             </div>
             <Link to="/cart">
               <img className="w-[2em] mr-2" src="icons/cart.svg" alt="" />
@@ -146,10 +146,15 @@ const Header = ({
           <input
             className="focus:outline-none text-center rounded w-[90%] p-2"
             type="text"
+            value={search}
+            onChange={onChangHandler}
           />
-          <span className="w-[10%] px-2 py-2 bg-[orange] rounded ">
+          <button
+            onClick={searchClickHandler}
+            className="w-[10%] px-2 py-2 bg-[orange] rounded "
+          >
             <img className="w-[2em]" src="icons/search.svg" alt="" />
-          </span>
+          </button>
         </div>
       </div>
 
