@@ -4,6 +4,22 @@ import { useParams, useOutletContext } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../components/UI/Loading";
+import { toast } from "react-toastify";
+
+const notify = () =>
+  toast.success("Item added to cart", {
+    
+    position: "top-right",
+    autoClose: 1000,
+    closeOnClick: true,
+    hideProgressBar: true,
+    theme: "light",
+    style: {
+      backgroundColor: "white",
+      color: "green",
+      fontSize: "14px",
+    },
+  });
 
 const SingleProduct = ({ setCart }) => {
   const [singleproduct, setSingleProduct] = useState(null);
@@ -53,7 +69,8 @@ const SingleProduct = ({ setCart }) => {
         body,
         config
       );
-      console.log('single products result',res)
+      console.log("single products result", res);
+
       setSingleProduct(res.data.data);
       setLoading(false);
     } catch (err) {
@@ -80,13 +97,16 @@ const SingleProduct = ({ setCart }) => {
     <>
       {loading && <Loading />}
       {singleproduct && !loading && (
-        <div className="flex flex-col md:flex-row justify-center md:p-[4rem] p-2 mt-[4em] w-full items-center gap-[4rem]">
+        <div className="flex flex-col md:flex-row justify-center md:p-[4rem] p-2  w-full items-center gap-[2rem] mt-[8rem] md:mt-[4rem]">
           <div className=" flex justify-center items-center">
-            <img src={singleproduct["product_photo"]}></img>
+            <img
+              className="md:w-[300px] w-[150px] "
+              src={singleproduct["product_photo"]}
+            ></img>
           </div>
 
           <div className="p-1 md:w-[30%] w-full flex flex-col gap-2">
-            <p className="font-bold text-[1.5em]">
+            <p className="md:font-bold md:text-[1.5em] md:mt-4 font-semibold sm:text-[1.2em]">
               {singleproduct["product_title"]}
             </p>
             <p className="">{singleproduct["product_description"]}</p>
@@ -96,9 +116,13 @@ const SingleProduct = ({ setCart }) => {
                 : ""}
             </p>
             <p className="">Rating:{singleproduct["product_star_rating"]}</p>
-            <p className="font-bold">{`$${singleproduct["product_price"]}`}</p>
+            <p className="font-bold">{`${singleproduct["product_price"]}`}</p>
             <button
-              onClick={AddToCart}
+              onClick={() => {
+                // notify();
+                AddToCart();
+                notify();
+              }}
               className="bg-[#ffa500] text-white rounded p-2 mt-4"
             >
               Add to cart

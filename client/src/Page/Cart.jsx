@@ -29,21 +29,21 @@ const CartEmpty = () => {
 const CartItem = ({ item, deleteHandler }) => {
   return (
     <>
-      <div className="flex mt-[1em]  p-[2em] gap-[1em]">
+      <div className="flex mt-[1em] p-[2em] gap-[1em]">
         <div className="">
           <img
-            className="md:w-[18em] w-[15em]"
+            className="md:w-[18em] w-[400px]"
             src={item["product_photo"]}
             alt=""
           />
         </div>
         <div className="">
-          <p className="md:font-bold font-medium">{item["product_title"]}</p>
+          <p className="md:font-normal font-medium">{item["product_title"]}</p>
           <p className="md:w-[15em] w-[3em]">{item["product_description"]}</p>
           <div className="flex mt-[1em]">
             <button
               onClick={() => deleteHandler(item["asin"])}
-              className="flex items-center justify-center hover:underline hover:text-blue-500"
+              className="flex items-center justify-center hover:underline hover:text-red-600"
             >
               Delete <img className="w-[1em]" src="/icons/delete.svg" alt="" />
             </button>
@@ -51,7 +51,7 @@ const CartItem = ({ item, deleteHandler }) => {
         </div>
 
         <div className="flex justify-end  md:w-[100%]">
-          <p className="font-bold md:text-[1.5em] text-[1rem] ">{`$${item["product_price"]}`}</p>
+          <p className="font-bold md:text-[1.5em] text-[1rem] ">{`${item["product_price"]}`}</p>
         </div>
       </div>
       <hr className="border-0 h-[1px] w-[100%] bg-slate-400 mt-[1em]" />
@@ -96,13 +96,22 @@ const Cart = ({ cart, setCart, userID }) => {
   }, [cart]);
 
   useEffect(() => {
-    let priceArray = cart.map((item) => item["product_price"]);
-    const totalSum = priceArray.reduce(
-      (acc, value) => acc + parseFloat(value.replace(/,/g, "")),
-      0
-    );
+    if (!cart || cart.length === 0) {
+      setTotalPrice("0.00");
+      return;
+    }
+    const totalSum = cart.reduce((acc, item) => {
+      let price = item["product_price"];
+      if (typeof price === "string") {
+        // Remove commas and currency symbols, then parse
+        price = price.replace(/[^\d.]/g, "");
+      }
+      price = parseFloat(price);
+      if (isNaN(price)) price = 0;
+      return acc + price;
+    }, 0);
     setTotalPrice(totalSum.toFixed(2));
-  }, []);
+  }, [cart]);
   if (cart.length < 1) {
     return <CartEmpty />;
   } else {
@@ -122,12 +131,12 @@ const Cart = ({ cart, setCart, userID }) => {
 
         <div className="flex md:flex-col md:w-[25%] md:gap-[1.5em] ">
           <div className="bg-white md:p-[2em] rounded gap-[2em] w-[100%]  flex flex-col justify-center items-center md:flex-col md:gap-[1em]">
-            <p className="font-bold mt-[1em]">
+            <p className="font-bold md:text-[1.5rem] mt-[1em]">
               Subtotal (
               {cart.length < 1 ? `${cart.length} item` : `${cart.length} items`}
               ) {`$${totalPrice}`}
             </p>
-            <button className="bg-[#ffa500] p-[10px] mb-[1em] text-white rounded">
+            <button className="bg-[#ffa500] p-[10px] mb-[1em] text-white rounded hover:shadow-lg transition-all duration-500 ease-in-out hover:bg-green-700">
               Proceed to checkout
             </button>
           </div>

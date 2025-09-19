@@ -68,9 +68,8 @@ const loginUser = async (req, res) => {
     }
 
     const user = await User.login(email, password);
-    console.log("user", user);
+    console.log(`user ${user} logged in successfully`);
     const token = createToken(user._id);
-    console.log("token", token);
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: true,
