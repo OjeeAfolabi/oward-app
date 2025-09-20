@@ -37,6 +37,9 @@ const Signup = () => {
       });
 
       if (res) {
+        const tokenValue = res.headers["authorization"];
+        localStorage.setItem("jwt", tokenValue);
+
         toast.success("SignUp successful", {
           position: "top-right",
           autoClose: 1000,

@@ -6,7 +6,7 @@ import SignOutModal from "./UI/SignOutModal";
 import ReactDOM from "react-dom";
 import { FaRegUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 const Header = ({
   setLoggedin,
@@ -45,23 +45,24 @@ const Header = ({
   };
 
   const logout = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
 
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_OWARD_URL}/logout`,
-        config,
-        {
-          withCredentials: true,
-        }
-      );
-      if (res) {
+      // const res = await axios.get(
+      //   `${import.meta.env.VITE_OWARD_URL}/logout`,
+      //   config,
+      //   {
+      //     withCredentials: true,
+      //   }
+      // );
+      // if (res) {
+      localStorage.setItem("jwt","")
         setLoggedin(false);
-      }
+      // }
     } catch (error) {
       console.log(error);
     }

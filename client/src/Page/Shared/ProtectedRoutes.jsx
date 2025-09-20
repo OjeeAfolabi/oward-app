@@ -22,11 +22,15 @@ const ProtectedRoutes = ({
       },
     };
 
+    const tokenValue = localStorage.getItem("jwt");
+
+    const url = `${import.meta.env.VITE_OWARD_URL}/user?token=${tokenValue}`;
+
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_OWARD_URL}/user`,
-        config
-      );
+      const res = await axios.get(`${url}`, {
+        ...config,
+        withCredentials: true,
+      });
       // console.log(res.data.data);
       let name = res.data.data.name;
       setName(name.split(" ")[0]);

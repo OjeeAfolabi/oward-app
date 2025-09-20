@@ -30,12 +30,16 @@ const Login = () => {
 
     try {
       // console.log("body", body);
+
       const res = await axios.post(url, body, {
         ...config,
         withCredentials: true,
       });
 
       if (res) {
+        const tokenValue = res.headers["authorization"];
+        localStorage.setItem("jwt", tokenValue);
+
         toast.success("Log in successful!", {
           position: "top-right",
           autoClose: 1000,
