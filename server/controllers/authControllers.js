@@ -43,10 +43,11 @@ const signUp = async (req, res) => {
     const user = await User.create({ name, email, password });
 
     const token = createToken(user._id);
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      maxAge: maxAge * 1000,
-    });
+    // res.cookie("jwt", token, {
+    //   httpOnly: true,
+    //   maxAge: maxAge * 1000,
+    // });
+    res.setHeader("Authorization", `Bearer ${token}`);
     res.status(201).json({ user });
   } catch (error) {
     res.status(400).json({
@@ -68,14 +69,17 @@ const loginUser = async (req, res) => {
     }
 
     const user = await User.login(email, password);
-    console.log(`user ${user} logged in successfully`);
+    // console.log(`user ${user} logged in successfully`);
     const token = createToken(user._id);
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: maxAge * 1000
-    });
+    // res.cookie("jwt", token, {
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: "none",
+    //   maxAge: maxAge * 1000
+    // });
+
+    res.setHeader("Authorization", `Bearer ${token}`);
+
     res.status(201).json({ user });
   } catch (error) {
     res.status(400).json({
