@@ -29,8 +29,9 @@ const Login = () => {
     const url = `${import.meta.env.VITE_OWARD_URL}/login`;
 
     try {
-      console.log("body", body);
-      const res = await axios.post(url, body, config, {
+      // console.log("body", body);
+      const res = await axios.post(url, body, {
+        ...config,
         withCredentials: true,
       });
 

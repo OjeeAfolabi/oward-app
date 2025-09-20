@@ -31,7 +31,8 @@ const Signup = () => {
     const url = `${import.meta.env.VITE_OWARD_URL}/signup`;
 
     try {
-      const res = await axios.post(url, body, config, {
+      const res = await axios.post(url, body, {
+        ...config,
         withCredentials: true,
       });
 
