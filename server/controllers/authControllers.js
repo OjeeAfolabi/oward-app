@@ -74,7 +74,9 @@ const loginUser = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: "https://oward-app.vercel.app",
       maxAge: maxAge * 1000,
+      path: "/",
     });
     res.status(201).json({ user });
   } catch (error) {
